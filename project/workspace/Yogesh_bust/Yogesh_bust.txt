@@ -1,0 +1,775 @@
+/home/enkush-3/.venv3.12/bin/python /home/enkush-3/Documents/Vision_1/src/main.py
+🔍 GPU шалгаж байна...
+✅ GPU олдлоо: |   0  NVIDIA GeForce MX450           Off |   00000000:2B:00.0 Off |                  N/A |
+   Sat May 16 19:48:51 2026
+   +-----------------------------------------------------------------------------------------+
+   | NVIDIA-SMI 580.142                Driver Version: 580.142        CUDA Version: 13.0     |
+   +-----------------------------------------+------------------------+----------------------+
+   | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+   | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+   |                                         |                        |               MIG M. |
+   |=========================================+========================+======================|
+   |   0  NVIDIA GeForce MX450           Off |   00000000:2B:00.0 Off |                  N/A |
+   | N/A   55C    P8            N/A  / 5001W |       3MiB /   2048MiB |      0%      Default |
+   |                                         |                        |                  N/A |
+   +-----------------------------------------+------------------------+----------------------+
+   +-----------------------------------------------------------------------------------------+
+   | Processes:                                                                              |
+
+═══════════════════════════════════════════════════════
+🏁  PHOTOGRAMMETRY PIPELINE ЭХЭЛЛЭЭ
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+📋  ТОХИРГООНЫ ХУРААНГУЙ
+═══════════════════════════════════════════════════════
+   Орчин     : 💻 Local Jupyter
+   Хурдасгуур: 🚀 GPU (CUDA)
+   Зураг орол.: ../Datasets/Yogesh_bust
+   Workspace  : ../project/workspace/Yogesh_bust
+═══════════════════════════════════════════════════════
+
+📋 АЛХАМ 1: Зургуудыг боловсруулах
+📂 Оролтын зураг   : ../Datasets/Yogesh_bust
+📂 Боловсруулсан   : ../images/Yogesh_bust/
+🔢 Resize factor   : 1/1 (original)
+📸 Нийт 52 зураг олдлоо
+🔄 Боловсруулж эхэллээ (resize 1/1)...
+   [10/52] 23.jpg (1504x2256 → 1504x2256)
+   [20/52] 33.jpg (1504x2256 → 1504x2256)
+   [30/52] 28.jpg (1504x2256 → 1504x2256)
+   [40/52] 5.jpg (1504x2256 → 1504x2256)
+   [50/52] 4.jpg (1504x2256 → 1504x2256)
+   [52/52] 1.jpg (1504x2256 → 1504x2256)
+
+✅ Нийт 52 зураг боловсруулагдлаа → '../images/Yogesh_bust/' хавтаст хадгалагдлаа
+
+📋 АЛХАМ 2: COLMAP pipeline
+🔧 Headless орчин тохируулагдлаа
+
+🚀 GPU олдсон → GPU pipeline-г эхлүүлж байна...
+🔧 CUDA орчин тохируулж байна...
+⚠️ CUDA суулгацын зам олдсонгүй
+
+═══════════════════════════════════════════════════════
+🚀  GPU PIPELINE ЭХЭЛЛЭЭ
+═══════════════════════════════════════════════════════
+
+📁 Хавтасны бүтцийг шалгаж байна...
+✅ 52 зураг олдлоо → ../images/Yogesh_bust/
+✅ Workspace хавтас бэлэн: ../project/workspace/Yogesh_bust/
+
+📋 АЛХАМ 1/5: Database үүсгэх
+
+───────────────────────────────────────────────────────
+🔄  Database creator
+📌  Команд: colmap database_creator --database_path ../project/workspace/Yogesh_bust/database.db
+───────────────────────────────────────────────────────
+
+✅  Database creator амжилттай дууслаа (0.0с)
+
+📋 АЛХАМ 2/5: Feature extraction (GPU)
+
+🎮 GPU feature extraction эхэллээ...
+
+───────────────────────────────────────────────────────
+🔄  GPU SIFT (high quality)
+📌  Команд: colmap feature_extractor --database_path ../project/workspace/Yogesh_bust/database.db --image_path ../images/Yogesh_bust --ImageReader.single_camera 1 --SiftExtraction.use_gpu 1 --SiftExtraction.gpu_index 0 --SiftExtraction.max_image_size 3200 --SiftExtraction.max_num_features 16384
+───────────────────────────────────────────────────────
+  E20260516 19:48:55.384940 275077 opengl_utils.cc:55] Check failed: context_.create()
+  terminate called after throwing an instance of 'std::invalid_argument'
+    what():  [opengl_utils.cc:55] Check failed: context_.create()
+  *** Aborted at 1778932135 (unix time) try "date -d @1778932135" if you are using GNU date ***
+  PC: @                0x0 (unknown)
+  *** SIGABRT (@0x3e800043285) received by PID 275077 (TID 0x7a38cc321800) from PID 275077; stack trace: ***
+      @     0x7a38d0be0206 (unknown)
+      @     0x7a38ce645f60 (unknown)
+      @     0x7a38ce6a5fed pthread_kill
+      @     0x7a38ce645e2e gsignal
+      @     0x7a38ce628888 abort
+      @     0x7a38ceaab05d (unknown)
+      @     0x7a38ceac11ea (unknown)
+      @     0x7a38ceaaaa9c std::terminate()
+      @     0x7a38ceac14a1 __cxa_throw
+      @     0x57fab616a78f (unknown)
+      @     0x57fab667415f (unknown)
+      @     0x57fab628a179 (unknown)
+      @     0x57fab61f3100 (unknown)
+      @     0x57fab61ce58d (unknown)
+      @     0x7a38ce62a575 (unknown)
+      @     0x7a38ce62a628 __libc_start_main
+      @     0x57fab61e9a45 (unknown)
+
+❌  GPU SIFT (high quality) амжилтгүй (return code: -6, 1.1с)
+⚠️ GPU SIFT (high quality) амжилтгүй → дараагийн хувилбар туршиж байна...
+
+───────────────────────────────────────────────────────
+🔄  GPU SIFT (medium - fallback)
+📌  Команд: colmap feature_extractor --database_path ../project/workspace/Yogesh_bust/database.db --image_path ../images/Yogesh_bust --ImageReader.single_camera 1 --SiftExtraction.use_gpu 1 --SiftExtraction.gpu_index 0 --SiftExtraction.max_image_size 1600 --SiftExtraction.max_num_features 8192
+───────────────────────────────────────────────────────
+  E20260516 19:48:56.497164 275086 opengl_utils.cc:55] Check failed: context_.create()
+  terminate called after throwing an instance of 'std::invalid_argument'
+    what():  [opengl_utils.cc:55] Check failed: context_.create()
+  *** Aborted at 1778932136 (unix time) try "date -d @1778932136" if you are using GNU date ***
+  PC: @                0x0 (unknown)
+  *** SIGABRT (@0x3e80004328e) received by PID 275086 (TID 0x73d27eec5800) from PID 275086; stack trace: ***
+      @     0x73d2836e3206 (unknown)
+      @     0x73d281245f60 (unknown)
+      @     0x73d2812a5fed pthread_kill
+      @     0x73d281245e2e gsignal
+      @     0x73d281228888 abort
+      @     0x73d2816ab05d (unknown)
+      @     0x73d2816c11ea (unknown)
+      @     0x73d2816aaa9c std::terminate()
+      @     0x73d2816c14a1 __cxa_throw
+      @     0x589d77b8a78f (unknown)
+      @     0x589d7809415f (unknown)
+      @     0x589d77caa179 (unknown)
+      @     0x589d77c13100 (unknown)
+      @     0x589d77bee58d (unknown)
+      @     0x73d28122a575 (unknown)
+      @     0x73d28122a628 __libc_start_main
+      @     0x589d77c09a45 (unknown)
+
+❌  GPU SIFT (medium - fallback) амжилтгүй (return code: -6, 1.1с)
+⚠️ GPU SIFT (medium - fallback) амжилтгүй → дараагийн хувилбар туршиж байна...
+⚠️ GPU feature extraction амжилтгүй → CPU рүү шилжиж байна
+⚠️ GPU feature extraction бүрэн амжилтгүй → CPU ашиглана
+
+💻 CPU feature extraction эхэллээ...
+
+───────────────────────────────────────────────────────
+🔄  CPU SIFT (high quality)
+📌  Команд: colmap feature_extractor --database_path ../project/workspace/Yogesh_bust/database.db --image_path ../images/Yogesh_bust --ImageReader.single_camera 1 --SiftExtraction.use_gpu 0 --SiftExtraction.max_image_size 1000 --SiftExtraction.max_num_features 16384
+───────────────────────────────────────────────────────
+  I20260516 19:48:57.590119 275094 misc.cc:198]
+  ==============================================================================
+  Feature extraction
+  ==============================================================================
+  I20260516 19:48:57.590510 275103 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590549 275104 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590592 275105 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590633 275106 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590669 275107 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590709 275108 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590758 275109 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:57.590806 275110 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:48:59.061482 275111 feature_extraction.cc:257] Processed file [1/52]
+  I20260516 19:48:59.061630 275111 feature_extraction.cc:260]   Name:            14.jpg
+  I20260516 19:48:59.061636 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.061641 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.061647 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.061657 275111 feature_extraction.cc:296]   Features:        1251
+  I20260516 19:48:59.160622 275111 feature_extraction.cc:257] Processed file [2/52]
+  I20260516 19:48:59.160676 275111 feature_extraction.cc:260]   Name:            13.jpg
+  I20260516 19:48:59.160683 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.160689 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.160696 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.160705 275111 feature_extraction.cc:296]   Features:        2060
+  I20260516 19:48:59.167483 275111 feature_extraction.cc:257] Processed file [3/52]
+  I20260516 19:48:59.167542 275111 feature_extraction.cc:260]   Name:            10.jpg
+  I20260516 19:48:59.167549 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.167554 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.167562 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.167572 275111 feature_extraction.cc:296]   Features:        1977
+  I20260516 19:48:59.289314 275111 feature_extraction.cc:257] Processed file [4/52]
+  I20260516 19:48:59.289373 275111 feature_extraction.cc:260]   Name:            1.jpg
+  I20260516 19:48:59.289379 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.289386 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.289392 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.289403 275111 feature_extraction.cc:296]   Features:        2752
+  I20260516 19:48:59.292634 275111 feature_extraction.cc:257] Processed file [5/52]
+  I20260516 19:48:59.292675 275111 feature_extraction.cc:260]   Name:            12.jpg
+  I20260516 19:48:59.292682 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.292687 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.292693 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.292701 275111 feature_extraction.cc:296]   Features:        2095
+  I20260516 19:48:59.367571 275111 feature_extraction.cc:257] Processed file [6/52]
+  I20260516 19:48:59.367659 275111 feature_extraction.cc:260]   Name:            0.jpg
+  I20260516 19:48:59.367666 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.367672 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.367679 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.367692 275111 feature_extraction.cc:296]   Features:        3340
+  I20260516 19:48:59.632536 275111 feature_extraction.cc:257] Processed file [7/52]
+  I20260516 19:48:59.635474 275111 feature_extraction.cc:260]   Name:            15.jpg
+  I20260516 19:48:59.635511 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.635519 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.635525 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.635536 275111 feature_extraction.cc:296]   Features:        4018
+  I20260516 19:48:59.686043 275111 feature_extraction.cc:257] Processed file [8/52]
+  I20260516 19:48:59.686093 275111 feature_extraction.cc:260]   Name:            16.jpg
+  I20260516 19:48:59.686100 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:48:59.686105 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:48:59.686112 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:48:59.686121 275111 feature_extraction.cc:296]   Features:        4042
+  I20260516 19:49:00.590667 275111 feature_extraction.cc:257] Processed file [9/52]
+  I20260516 19:49:00.590781 275111 feature_extraction.cc:260]   Name:            17.jpg
+  I20260516 19:49:00.590798 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:00.590813 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:00.590827 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:00.590847 275111 feature_extraction.cc:296]   Features:        2786
+  I20260516 19:49:00.754478 275111 feature_extraction.cc:257] Processed file [10/52]
+  I20260516 19:49:00.754523 275111 feature_extraction.cc:260]   Name:            19.jpg
+  I20260516 19:49:00.754531 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:00.754536 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:00.754544 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:00.754554 275111 feature_extraction.cc:296]   Features:        3251
+  I20260516 19:49:00.822218 275111 feature_extraction.cc:257] Processed file [11/52]
+  I20260516 19:49:00.822281 275111 feature_extraction.cc:260]   Name:            2.jpg
+  I20260516 19:49:00.822288 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:00.822293 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:00.822300 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:00.822310 275111 feature_extraction.cc:296]   Features:        2289
+  I20260516 19:49:00.985132 275111 feature_extraction.cc:257] Processed file [12/52]
+  I20260516 19:49:00.985312 275111 feature_extraction.cc:260]   Name:            21.jpg
+  I20260516 19:49:00.985337 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:00.985358 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:00.985379 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:00.985425 275111 feature_extraction.cc:296]   Features:        2666
+  I20260516 19:49:01.075151 275111 feature_extraction.cc:257] Processed file [13/52]
+  I20260516 19:49:01.075232 275111 feature_extraction.cc:260]   Name:            20.jpg
+  I20260516 19:49:01.075238 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:01.075244 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:01.075251 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:01.075265 275111 feature_extraction.cc:296]   Features:        3417
+  I20260516 19:49:01.197669 275111 feature_extraction.cc:257] Processed file [14/52]
+  I20260516 19:49:01.197729 275111 feature_extraction.cc:260]   Name:            18.jpg
+  I20260516 19:49:01.197736 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:01.197741 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:01.197749 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:01.197760 275111 feature_extraction.cc:296]   Features:        5298
+  I20260516 19:49:01.324034 275111 feature_extraction.cc:257] Processed file [15/52]
+  I20260516 19:49:01.324095 275111 feature_extraction.cc:260]   Name:            23.jpg
+  I20260516 19:49:01.324102 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:01.324108 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:01.324115 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:01.324126 275111 feature_extraction.cc:296]   Features:        2812
+  I20260516 19:49:01.383596 275111 feature_extraction.cc:257] Processed file [16/52]
+  I20260516 19:49:01.383715 275111 feature_extraction.cc:260]   Name:            22.jpg
+  I20260516 19:49:01.383733 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:01.383749 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:01.383764 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:01.383783 275111 feature_extraction.cc:296]   Features:        3954
+  I20260516 19:49:02.246512 275111 feature_extraction.cc:257] Processed file [17/52]
+  I20260516 19:49:02.246628 275111 feature_extraction.cc:260]   Name:            24.jpg
+  I20260516 19:49:02.246646 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.246662 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.246678 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.246699 275111 feature_extraction.cc:296]   Features:        3657
+  I20260516 19:49:02.367491 275111 feature_extraction.cc:257] Processed file [18/52]
+  I20260516 19:49:02.367550 275111 feature_extraction.cc:260]   Name:            28.jpg
+  I20260516 19:49:02.367558 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.367565 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.367573 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.367584 275111 feature_extraction.cc:296]   Features:        1136
+  I20260516 19:49:02.411774 275111 feature_extraction.cc:257] Processed file [19/52]
+  I20260516 19:49:02.412231 275111 feature_extraction.cc:260]   Name:            25.jpg
+  I20260516 19:49:02.412274 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.412292 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.412310 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.412331 275111 feature_extraction.cc:296]   Features:        3104
+  I20260516 19:49:02.613480 275111 feature_extraction.cc:257] Processed file [20/52]
+  I20260516 19:49:02.613615 275111 feature_extraction.cc:260]   Name:            26.jpg
+  I20260516 19:49:02.613636 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.613654 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.613677 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.613711 275111 feature_extraction.cc:296]   Features:        2646
+  I20260516 19:49:02.660069 275111 feature_extraction.cc:257] Processed file [21/52]
+  I20260516 19:49:02.660157 275111 feature_extraction.cc:260]   Name:            29.jpg
+  I20260516 19:49:02.660166 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.660171 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.660178 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.660190 275111 feature_extraction.cc:296]   Features:        2360
+  I20260516 19:49:02.743480 275111 feature_extraction.cc:257] Processed file [22/52]
+  I20260516 19:49:02.743533 275111 feature_extraction.cc:260]   Name:            27.jpg
+  I20260516 19:49:02.743541 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.743546 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.743552 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.743562 275111 feature_extraction.cc:296]   Features:        2749
+  I20260516 19:49:02.914939 275111 feature_extraction.cc:257] Processed file [23/52]
+  I20260516 19:49:02.915373 275111 feature_extraction.cc:260]   Name:            3.jpg
+  I20260516 19:49:02.915395 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:02.915401 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:02.915408 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:02.915419 275111 feature_extraction.cc:296]   Features:        1878
+  I20260516 19:49:03.088491 275111 feature_extraction.cc:257] Processed file [24/52]
+  I20260516 19:49:03.088670 275111 feature_extraction.cc:260]   Name:            31.jpg
+  I20260516 19:49:03.088704 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:03.088725 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:03.088752 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:03.088798 275111 feature_extraction.cc:296]   Features:        2738
+  I20260516 19:49:03.850872 275111 feature_extraction.cc:257] Processed file [25/52]
+  I20260516 19:49:03.850934 275111 feature_extraction.cc:260]   Name:            30.jpg
+  I20260516 19:49:03.850939 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:03.850945 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:03.850951 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:03.850961 275111 feature_extraction.cc:296]   Features:        2747
+  I20260516 19:49:03.926093 275111 feature_extraction.cc:257] Processed file [26/52]
+  I20260516 19:49:03.926209 275111 feature_extraction.cc:260]   Name:            32.jpg
+  I20260516 19:49:03.926227 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:03.926244 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:03.926260 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:03.926280 275111 feature_extraction.cc:296]   Features:        1710
+  I20260516 19:49:04.110025 275111 feature_extraction.cc:257] Processed file [27/52]
+  I20260516 19:49:04.110129 275111 feature_extraction.cc:260]   Name:            35.jpg
+  I20260516 19:49:04.110137 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:04.110142 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:04.110152 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:04.110164 275111 feature_extraction.cc:296]   Features:        2727
+  I20260516 19:49:04.357709 275111 feature_extraction.cc:257] Processed file [28/52]
+  I20260516 19:49:04.359473 275111 feature_extraction.cc:260]   Name:            33.jpg
+  I20260516 19:49:04.359503 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:04.359510 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:04.359517 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:04.359529 275111 feature_extraction.cc:296]   Features:        4854
+  I20260516 19:49:04.402482 275111 feature_extraction.cc:257] Processed file [29/52]
+  I20260516 19:49:04.402659 275111 feature_extraction.cc:260]   Name:            37.jpg
+  I20260516 19:49:04.402678 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:04.402694 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:04.402711 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:04.402732 275111 feature_extraction.cc:296]   Features:        1526
+  I20260516 19:49:04.487195 275111 feature_extraction.cc:257] Processed file [30/52]
+  I20260516 19:49:04.487305 275111 feature_extraction.cc:260]   Name:            36.jpg
+  I20260516 19:49:04.487325 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:04.487345 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:04.488152 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:04.488281 275111 feature_extraction.cc:296]   Features:        2408
+  I20260516 19:49:04.536916 275111 feature_extraction.cc:257] Processed file [31/52]
+  I20260516 19:49:04.536964 275111 feature_extraction.cc:260]   Name:            34.jpg
+  I20260516 19:49:04.536971 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:04.536978 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:04.536985 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:04.536996 275111 feature_extraction.cc:296]   Features:        4098
+  I20260516 19:49:04.630210 275111 feature_extraction.cc:257] Processed file [32/52]
+  I20260516 19:49:04.630494 275111 feature_extraction.cc:260]   Name:            38.jpg
+  I20260516 19:49:04.630522 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:04.630539 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:04.630558 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:04.630579 275111 feature_extraction.cc:296]   Features:        1754
+  I20260516 19:49:05.419667 275111 feature_extraction.cc:257] Processed file [33/52]
+  I20260516 19:49:05.422482 275111 feature_extraction.cc:260]   Name:            40.jpg
+  I20260516 19:49:05.422516 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:05.422523 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:05.422529 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:05.422541 275111 feature_extraction.cc:296]   Features:        1205
+  I20260516 19:49:05.539674 275111 feature_extraction.cc:257] Processed file [34/52]
+  I20260516 19:49:05.539731 275111 feature_extraction.cc:260]   Name:            39.jpg
+  I20260516 19:49:05.539738 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:05.539744 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:05.539750 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:05.539762 275111 feature_extraction.cc:296]   Features:        2704
+  I20260516 19:49:05.754758 275111 feature_extraction.cc:257] Processed file [35/52]
+  I20260516 19:49:05.754979 275111 feature_extraction.cc:260]   Name:            4.jpg
+  I20260516 19:49:05.755044 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:05.755079 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:05.755107 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:05.755144 275111 feature_extraction.cc:296]   Features:        4292
+  I20260516 19:49:05.969498 275111 feature_extraction.cc:257] Processed file [36/52]
+  I20260516 19:49:05.969602 275111 feature_extraction.cc:260]   Name:            41.jpg
+  I20260516 19:49:05.969611 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:05.969619 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:05.969625 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:05.969640 275111 feature_extraction.cc:296]   Features:        3062
+  I20260516 19:49:05.986626 275111 feature_extraction.cc:257] Processed file [37/52]
+  I20260516 19:49:05.986697 275111 feature_extraction.cc:260]   Name:            43.jpg
+  I20260516 19:49:05.986703 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:05.986708 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:05.986716 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:05.986724 275111 feature_extraction.cc:296]   Features:        1219
+  I20260516 19:49:06.166054 275111 feature_extraction.cc:257] Processed file [38/52]
+  I20260516 19:49:06.166102 275111 feature_extraction.cc:260]   Name:            44.jpg
+  I20260516 19:49:06.166108 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:06.166114 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:06.166121 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:06.166132 275111 feature_extraction.cc:296]   Features:        3010
+  I20260516 19:49:06.223484 275111 feature_extraction.cc:257] Processed file [39/52]
+  I20260516 19:49:06.223537 275111 feature_extraction.cc:260]   Name:            45.jpg
+  I20260516 19:49:06.223544 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:06.223549 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:06.223556 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:06.223567 275111 feature_extraction.cc:296]   Features:        2719
+  I20260516 19:49:06.248479 275111 feature_extraction.cc:257] Processed file [40/52]
+  I20260516 19:49:06.248545 275111 feature_extraction.cc:260]   Name:            42.jpg
+  I20260516 19:49:06.248551 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:06.248557 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:06.248564 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:06.248576 275111 feature_extraction.cc:296]   Features:        3336
+  I20260516 19:49:07.034922 275111 feature_extraction.cc:257] Processed file [41/52]
+  I20260516 19:49:07.034976 275111 feature_extraction.cc:260]   Name:            48.jpg
+  I20260516 19:49:07.034981 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:07.034986 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:07.034992 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:07.035002 275111 feature_extraction.cc:296]   Features:        547
+  I20260516 19:49:07.039196 275111 feature_extraction.cc:257] Processed file [42/52]
+  I20260516 19:49:07.039260 275111 feature_extraction.cc:260]   Name:            46.jpg
+  I20260516 19:49:07.039268 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:07.039273 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:07.039278 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:07.039288 275111 feature_extraction.cc:296]   Features:        3148
+  I20260516 19:49:07.103125 275111 feature_extraction.cc:257] Processed file [43/52]
+  I20260516 19:49:07.103186 275111 feature_extraction.cc:260]   Name:            47.jpg
+  I20260516 19:49:07.103192 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:07.103197 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:07.103204 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:07.103214 275111 feature_extraction.cc:296]   Features:        1688
+  I20260516 19:49:07.534207 275111 feature_extraction.cc:257] Processed file [44/52]
+  I20260516 19:49:07.534261 275111 feature_extraction.cc:260]   Name:            5.jpg
+  I20260516 19:49:07.534268 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:07.534273 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:07.534281 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:07.534291 275111 feature_extraction.cc:296]   Features:        2420
+  I20260516 19:49:07.711479 275111 feature_extraction.cc:257] Processed file [45/52]
+  I20260516 19:49:07.711535 275111 feature_extraction.cc:260]   Name:            52.jpg
+  I20260516 19:49:07.711542 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:07.711548 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:07.711555 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:07.711565 275111 feature_extraction.cc:296]   Features:        2018
+  I20260516 19:49:07.840360 275111 feature_extraction.cc:257] Processed file [46/52]
+  I20260516 19:49:07.840472 275111 feature_extraction.cc:260]   Name:            49.jpg
+  I20260516 19:49:07.840489 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:07.840504 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:07.840520 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:07.840545 275111 feature_extraction.cc:296]   Features:        4155
+  I20260516 19:49:08.078491 275111 feature_extraction.cc:257] Processed file [47/52]
+  I20260516 19:49:08.078667 275111 feature_extraction.cc:260]   Name:            51.jpg
+  I20260516 19:49:08.078686 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:08.078704 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:08.078723 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:08.078747 275111 feature_extraction.cc:296]   Features:        5401
+  I20260516 19:49:08.153439 275111 feature_extraction.cc:257] Processed file [48/52]
+  I20260516 19:49:08.153497 275111 feature_extraction.cc:260]   Name:            50.jpg
+  I20260516 19:49:08.153504 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:08.153510 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:08.153517 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:08.153528 275111 feature_extraction.cc:296]   Features:        4338
+  I20260516 19:49:08.246138 275111 feature_extraction.cc:257] Processed file [49/52]
+  I20260516 19:49:08.246188 275111 feature_extraction.cc:260]   Name:            6.jpg
+  I20260516 19:49:08.246196 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:08.246201 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:08.246208 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:08.246219 275111 feature_extraction.cc:296]   Features:        1692
+  I20260516 19:49:08.362433 275111 feature_extraction.cc:257] Processed file [50/52]
+  I20260516 19:49:08.362488 275111 feature_extraction.cc:260]   Name:            7.jpg
+  I20260516 19:49:08.362496 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:08.362504 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:08.362512 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:08.362524 275111 feature_extraction.cc:296]   Features:        2534
+  I20260516 19:49:08.429378 275111 feature_extraction.cc:257] Processed file [51/52]
+  I20260516 19:49:08.429416 275111 feature_extraction.cc:260]   Name:            8.jpg
+  I20260516 19:49:08.429420 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:08.429423 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:08.429427 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:08.429435 275111 feature_extraction.cc:296]   Features:        2279
+  I20260516 19:49:08.570309 275111 feature_extraction.cc:257] Processed file [52/52]
+  I20260516 19:49:08.570363 275111 feature_extraction.cc:260]   Name:            9.jpg
+  I20260516 19:49:08.570367 275111 feature_extraction.cc:286]   Dimensions:      1504 x 2256
+  I20260516 19:49:08.570369 275111 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:49:08.570374 275111 feature_extraction.cc:292]   Focal Length:    2707.20px
+  I20260516 19:49:08.570382 275111 feature_extraction.cc:296]   Features:        2112
+  I20260516 19:49:08.579698 275094 timer.cc:91] Elapsed time: 0.183 [minutes]
+
+✅  CPU SIFT (high quality) амжилттай дууслаа (11.0с)
+
+📋 АЛХАМ 3/5: Feature matching (GPU)
+
+───────────────────────────────────────────────────────
+🔄  GPU exhaustive matching
+📌  Команд: colmap exhaustive_matcher --database_path ../project/workspace/Yogesh_bust/database.db --SiftMatching.use_gpu 1 --SiftMatching.gpu_index 0 --SiftMatching.guided_matching 1 --SiftMatching.max_ratio 0.75 --SiftMatching.max_distance 0.7
+───────────────────────────────────────────────────────
+  E20260516 19:49:08.619645 275132 opengl_utils.cc:55] Check failed: context_.create()
+  terminate called after throwing an instance of 'std::invalid_argument'
+    what():  [opengl_utils.cc:55] Check failed: context_.create()
+  *** Aborted at 1778932148 (unix time) try "date -d @1778932148" if you are using GNU date ***
+  PC: @                0x0 (unknown)
+  *** SIGABRT (@0x3e8000432bc) received by PID 275132 (TID 0x77265cd08800) from PID 275132; stack trace: ***
+      @     0x7726615d3206 (unknown)
+      @     0x77265f045f60 (unknown)
+      @     0x77265f0a5fed pthread_kill
+      @     0x77265f045e2e gsignal
+      @     0x77265f028888 abort
+      @     0x77265f4ab05d (unknown)
+      @     0x77265f4c11ea (unknown)
+      @     0x77265f4aaa9c std::terminate()
+      @     0x77265f4c14a1 __cxa_throw
+      @     0x6213aba5478f (unknown)
+      @     0x6213abf5e15f (unknown)
+      @     0x6213abb836ad (unknown)
+      @     0x6213abb8fee9 (unknown)
+      @     0x6213abb7d837 (unknown)
+      @     0x6213abadd486 (unknown)
+      @     0x6213abab858d (unknown)
+      @     0x77265f02a575 (unknown)
+      @     0x77265f02a628 __libc_start_main
+      @     0x6213abad3a45 (unknown)
+
+❌  GPU exhaustive matching амжилтгүй (return code: -6, 1.1с)
+⚠️ GPU matching амжилтгүй → CPU matching туршиж байна
+
+───────────────────────────────────────────────────────
+🔄  CPU exhaustive matching (fallback)
+📌  Команд: colmap exhaustive_matcher --database_path ../project/workspace/Yogesh_bust/database.db --SiftMatching.use_gpu 0 --SiftMatching.guided_matching 1 --SiftMatching.max_ratio 0.75 --SiftMatching.max_distance 0.7
+───────────────────────────────────────────────────────
+  I20260516 19:49:09.740959 275145 misc.cc:198]
+  ==============================================================================
+  Feature matching
+  ==============================================================================
+  I20260516 19:49:09.741139 275146 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741175 275147 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741209 275148 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741247 275149 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741293 275150 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741328 275151 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741365 275152 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741403 275153 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741744 275162 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741779 275163 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741815 275164 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741852 275165 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741889 275166 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741925 275167 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.741961 275168 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.742005 275169 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:49:09.742123 275145 pairing.cc:168] Generating exhaustive image pairs...
+  I20260516 19:49:09.742137 275145 pairing.cc:202] Matching block [1/2, 1/2]
+  I20260516 19:50:20.885619 275145 feature_matching.cc:46]  in 71.144s
+  I20260516 19:50:20.886518 275145 pairing.cc:202] Matching block [1/2, 2/2]
+  I20260516 19:50:21.089408 275145 feature_matching.cc:46]  in 0.203s
+  I20260516 19:50:21.089538 275145 pairing.cc:202] Matching block [2/2, 1/2]
+  I20260516 19:50:25.891304 275145 feature_matching.cc:46]  in 4.802s
+  I20260516 19:50:25.891484 275145 pairing.cc:202] Matching block [2/2, 2/2]
+  I20260516 19:50:26.082846 275145 feature_matching.cc:46]  in 0.191s
+  I20260516 19:50:26.082942 275145 timer.cc:91] Elapsed time: 1.272 [minutes]
+
+✅  CPU exhaustive matching (fallback) амжилттай дууслаа (76.4с)
+
+📋 АЛХАМ 4/5: Structure-from-Motion (mapper)
+
+───────────────────────────────────────────────────────
+🔄  Structure-from-Motion (SfM)
+📌  Команд: colmap mapper --database_path ../project/workspace/Yogesh_bust/database.db --image_path ../images/Yogesh_bust --output_path ../project/workspace/Yogesh_bust/sparse --Mapper.ba_refine_focal_length 0 --Mapper.ba_refine_principal_point 0 --Mapper.init_min_tri_angle 4 --Mapper.multiple_models 0 --Mapper.extract_colors 1
+───────────────────────────────────────────────────────
+  I20260516 19:50:26.135555 275702 incremental_mapper.cc:225] Loading database
+  I20260516 19:50:26.136368 275702 database_cache.cc:65] Loading cameras...
+  I20260516 19:50:26.136400 275702 database_cache.cc:75]  1 in 0.000s
+  I20260516 19:50:26.136409 275702 database_cache.cc:83] Loading matches...
+  I20260516 19:50:26.137176 275702 database_cache.cc:89]  202 in 0.001s
+  I20260516 19:50:26.137192 275702 database_cache.cc:105] Loading images...
+  I20260516 19:50:26.141525 275702 database_cache.cc:155]  52 in 0.004s (connected 52)
+  I20260516 19:50:26.141578 275702 database_cache.cc:166] Building correspondence graph...
+  I20260516 19:50:26.150418 275702 database_cache.cc:195]  in 0.009s (ignored 0)
+  I20260516 19:50:26.150560 275702 timer.cc:91] Elapsed time: 0.000 [minutes]
+  I20260516 19:50:26.152534 275702 incremental_mapper.cc:265] Finding good initial image pair
+  I20260516 19:50:26.168805 275702 incremental_mapper.cc:289] Initializing with image pair #14 and #8
+  I20260516 19:50:26.170389 275702 incremental_mapper.cc:294] Global bundle adjustment
+  I20260516 19:50:26.221473 275702 incremental_mapper.cc:375] Registering image #12 (3)
+  I20260516 19:50:26.221514 275702 incremental_mapper.cc:378] => Image sees 224 / 971 points
+  I20260516 19:50:26.309319 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:26.358042 275702 incremental_mapper.cc:375] Registering image #9 (4)
+  I20260516 19:50:26.358085 275702 incremental_mapper.cc:378] => Image sees 235 / 938 points
+  I20260516 19:50:26.483419 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:26.540129 275702 incremental_mapper.cc:375] Registering image #10 (5)
+  I20260516 19:50:26.540166 275702 incremental_mapper.cc:378] => Image sees 206 / 1252 points
+  I20260516 19:50:26.727752 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:26.856158 275702 incremental_mapper.cc:375] Registering image #20 (6)
+  I20260516 19:50:26.856194 275702 incremental_mapper.cc:378] => Image sees 277 / 1284 points
+  I20260516 19:50:27.028862 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:27.138352 275702 incremental_mapper.cc:375] Registering image #50 (7)
+  I20260516 19:50:27.138391 275702 incremental_mapper.cc:378] => Image sees 246 / 967 points
+  I20260516 19:50:27.278101 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:27.410272 275702 incremental_mapper.cc:375] Registering image #51 (8)
+  I20260516 19:50:27.410310 275702 incremental_mapper.cc:378] => Image sees 264 / 1020 points
+  I20260516 19:50:27.549746 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:27.653817 275702 incremental_mapper.cc:375] Registering image #25 (9)
+  I20260516 19:50:27.653854 275702 incremental_mapper.cc:378] => Image sees 245 / 1046 points
+  I20260516 19:50:27.777307 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:27.873493 275702 incremental_mapper.cc:375] Registering image #21 (10)
+  I20260516 19:50:27.873529 275702 incremental_mapper.cc:378] => Image sees 273 / 1086 points
+  I20260516 19:50:28.001938 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:28.193233 275702 incremental_mapper.cc:375] Registering image #13 (11)
+  I20260516 19:50:28.193270 275702 incremental_mapper.cc:378] => Image sees 194 / 1054 points
+  I20260516 19:50:28.328162 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:28.465647 275702 incremental_mapper.cc:375] Registering image #7 (12)
+  I20260516 19:50:28.465687 275702 incremental_mapper.cc:378] => Image sees 225 / 935 points
+  I20260516 19:50:28.597532 275702 incremental_mapper.cc:375] Registering image #19 (13)
+  I20260516 19:50:28.597571 275702 incremental_mapper.cc:378] => Image sees 215 / 1014 points
+  I20260516 19:50:28.702178 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:28.821097 275702 incremental_mapper.cc:375] Registering image #5 (14)
+  I20260516 19:50:28.821157 275702 incremental_mapper.cc:378] => Image sees 182 / 840 points
+  I20260516 19:50:28.936839 275702 incremental_mapper.cc:375] Registering image #52 (15)
+  I20260516 19:50:28.936877 275702 incremental_mapper.cc:378] => Image sees 210 / 791 points
+  I20260516 19:50:29.021986 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:29.234727 275702 incremental_mapper.cc:375] Registering image #2 (16)
+  I20260516 19:50:29.234766 275702 incremental_mapper.cc:378] => Image sees 214 / 691 points
+  I20260516 19:50:29.337736 275702 incremental_mapper.cc:375] Registering image #3 (17)
+  I20260516 19:50:29.337771 275702 incremental_mapper.cc:378] => Image sees 166 / 573 points
+  I20260516 19:50:29.403146 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:29.636548 275702 incremental_mapper.cc:375] Registering image #22 (18)
+  I20260516 19:50:29.636590 275702 incremental_mapper.cc:378] => Image sees 194 / 709 points
+  I20260516 19:50:29.759370 275702 incremental_mapper.cc:375] Registering image #15 (19)
+  I20260516 19:50:29.759408 275702 incremental_mapper.cc:378] => Image sees 193 / 878 points
+  I20260516 19:50:29.853312 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:30.066816 275702 incremental_mapper.cc:375] Registering image #45 (20)
+  I20260516 19:50:30.066880 275702 incremental_mapper.cc:378] => Image sees 148 / 636 points
+  I20260516 19:50:30.150650 275702 incremental_mapper.cc:375] Registering image #44 (21)
+  I20260516 19:50:30.150688 275702 incremental_mapper.cc:378] => Image sees 177 / 711 points
+  I20260516 19:50:30.222751 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:30.471932 275702 incremental_mapper.cc:375] Registering image #18 (22)
+  I20260516 19:50:30.471971 275702 incremental_mapper.cc:378] => Image sees 153 / 349 points
+  I20260516 19:50:30.576364 275702 incremental_mapper.cc:375] Registering image #17 (23)
+  I20260516 19:50:30.576398 275702 incremental_mapper.cc:378] => Image sees 140 / 750 points
+  I20260516 19:50:30.663453 275702 incremental_mapper.cc:375] Registering image #32 (24)
+  I20260516 19:50:30.663496 275702 incremental_mapper.cc:378] => Image sees 116 / 614 points
+  I20260516 19:50:30.733173 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:30.913252 275702 incremental_mapper.cc:375] Registering image #11 (25)
+  I20260516 19:50:30.913296 275702 incremental_mapper.cc:378] => Image sees 108 / 547 points
+  I20260516 19:50:30.986140 275702 incremental_mapper.cc:375] Registering image #4 (26)
+  I20260516 19:50:30.986203 275702 incremental_mapper.cc:378] => Image sees 142 / 529 points
+  I20260516 19:50:31.051111 275702 incremental_mapper.cc:375] Registering image #49 (27)
+  I20260516 19:50:31.051151 275702 incremental_mapper.cc:378] => Image sees 124 / 385 points
+  I20260516 19:50:31.101418 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:31.362962 275702 incremental_mapper.cc:375] Registering image #1 (28)
+  I20260516 19:50:31.363001 275702 incremental_mapper.cc:378] => Image sees 99 / 253 points
+  I20260516 19:50:31.422293 275702 incremental_mapper.cc:375] Registering image #34 (29)
+  I20260516 19:50:31.422333 275702 incremental_mapper.cc:378] => Image sees 115 / 901 points
+  I20260516 19:50:31.500043 275702 incremental_mapper.cc:375] Registering image #30 (30)
+  I20260516 19:50:31.500087 275702 incremental_mapper.cc:378] => Image sees 113 / 762 points
+  I20260516 19:50:31.572599 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:31.796394 275702 incremental_mapper.cc:375] Registering image #29 (31)
+  I20260516 19:50:31.796435 275702 incremental_mapper.cc:378] => Image sees 104 / 482 points
+  I20260516 19:50:31.854066 275702 incremental_mapper.cc:375] Registering image #27 (32)
+  I20260516 19:50:31.854103 275702 incremental_mapper.cc:378] => Image sees 53 / 629 points
+  I20260516 19:50:31.908358 275702 incremental_mapper.cc:375] Registering image #24 (33)
+  I20260516 19:50:31.908396 275702 incremental_mapper.cc:378] => Image sees 84 / 581 points
+  I20260516 19:50:31.953646 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:32.381126 275702 incremental_mapper.cc:375] Registering image #31 (34)
+  I20260516 19:50:32.381163 275702 incremental_mapper.cc:378] => Image sees 78 / 661 points
+  I20260516 19:50:32.426055 275702 incremental_mapper.cc:375] Registering image #6 (35)
+  I20260516 19:50:32.426091 275702 incremental_mapper.cc:378] => Image sees 54 / 1064 points
+  I20260516 19:50:32.428531 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:32.428546 275702 incremental_mapper.cc:375] Registering image #23 (35)
+  I20260516 19:50:32.428550 275702 incremental_mapper.cc:378] => Image sees 52 / 401 points
+  I20260516 19:50:32.469285 275702 incremental_mapper.cc:375] Registering image #26 (36)
+  I20260516 19:50:32.469321 275702 incremental_mapper.cc:378] => Image sees 47 / 399 points
+  I20260516 19:50:32.505995 275702 incremental_mapper.cc:375] Registering image #39 (37)
+  I20260516 19:50:32.506029 275702 incremental_mapper.cc:378] => Image sees 35 / 672 points
+  I20260516 19:50:32.507383 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:32.507404 275702 incremental_mapper.cc:375] Registering image #40 (37)
+  I20260516 19:50:32.507411 275702 incremental_mapper.cc:378] => Image sees 40 / 821 points
+  I20260516 19:50:32.542233 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:32.777900 275702 incremental_mapper.cc:375] Registering image #36 (38)
+  I20260516 19:50:32.777928 275702 incremental_mapper.cc:378] => Image sees 73 / 744 points
+  I20260516 19:50:32.829370 275702 incremental_mapper.cc:375] Registering image #42 (39)
+  I20260516 19:50:32.829403 275702 incremental_mapper.cc:378] => Image sees 74 / 519 points
+  I20260516 19:50:32.883102 275702 incremental_mapper.cc:375] Registering image #38 (40)
+  I20260516 19:50:32.883147 275702 incremental_mapper.cc:378] => Image sees 35 / 913 points
+  I20260516 19:50:32.885036 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:32.885058 275702 incremental_mapper.cc:375] Registering image #39 (40)
+  I20260516 19:50:32.885062 275702 incremental_mapper.cc:378] => Image sees 250 / 672 points
+  I20260516 19:50:32.949746 275702 incremental_mapper.cc:375] Registering image #37 (41)
+  I20260516 19:50:32.949784 275702 incremental_mapper.cc:378] => Image sees 39 / 184 points
+  I20260516 19:50:32.950740 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:32.950757 275702 incremental_mapper.cc:375] Registering image #6 (41)
+  I20260516 19:50:32.950759 275702 incremental_mapper.cc:378] => Image sees 53 / 1064 points
+  I20260516 19:50:32.953289 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:32.953302 275702 incremental_mapper.cc:375] Registering image #38 (41)
+  I20260516 19:50:32.953310 275702 incremental_mapper.cc:378] => Image sees 32 / 913 points
+  I20260516 19:50:32.955255 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:32.955268 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:33.100744 275702 incremental_mapper.cc:375] Registering image #6 (41)
+  I20260516 19:50:33.100812 275702 incremental_mapper.cc:378] => Image sees 53 / 1064 points
+  I20260516 19:50:33.103920 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:33.103986 275702 incremental_mapper.cc:375] Registering image #37 (41)
+  I20260516 19:50:33.103994 275702 incremental_mapper.cc:378] => Image sees 39 / 184 points
+  I20260516 19:50:33.105186 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:33.105218 275702 incremental_mapper.cc:375] Registering image #38 (41)
+  I20260516 19:50:33.105224 275702 incremental_mapper.cc:378] => Image sees 32 / 913 points
+  I20260516 19:50:33.107424 275702 incremental_mapper.cc:389] => Could not register, trying another image.
+  I20260516 19:50:33.107450 275702 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:50:33.216387 275702 timer.cc:91] Elapsed time: 0.118 [minutes]
+
+✅  Structure-from-Motion (SfM) амжилттай дууслаа (7.1с)
+
+📋 АЛХАМ 5/5: Sparse model → PLY хөрвүүлэх
+
+───────────────────────────────────────────────────────
+🔄  PLY экспорт
+📌  Команд: colmap model_converter --input_path ../project/workspace/Yogesh_bust/sparse/0 --output_path ../project/workspace/Yogesh_bust/sparse_reconstruction.ply --output_type PLY
+───────────────────────────────────────────────────────
+
+✅  PLY экспорт амжилттай дууслаа (0.0с)
+
+───────────────────────────────────────────────────────
+🔄  TXT экспорт (нэмэлт)
+📌  Команд: colmap model_converter --input_path ../project/workspace/Yogesh_bust/sparse/0 --output_path ../project/workspace/Yogesh_bust --output_type TXT
+───────────────────────────────────────────────────────
+
+✅  TXT экспорт (нэмэлт) амжилттай дууслаа (0.1с)
+
+🎉 GPU pipeline амжилттай дууслаа!
+✅ PLY файл: ../project/workspace/Yogesh_bust/sparse_reconstruction.ply  (60.5 KB)
+📊 Vertices: 4116
+
+📋 АЛХАМ 3: Point cloud цэвэрлэгээ
+Эхний цэгүүд: 4116
+Цэвэрлэсний дараах цэгүүд: 2251
+✅ Хадгалагдлаа: ../project/workspace/Yogesh_bust/cleaned_pcd.ply
+
+📋 АЛХАМ 4: Poisson mesh үүсгэх
+🚀 Сайжруулсан Algorithmic Mesh эхэллээ...
+[Open3D DEBUG] Input Points / Samples: 3990 / 3584
+[Open3D DEBUG] #   Got kernel density: 0.004239082336425781 (s), 783.27734375 (MB) / 783.27734375 (MB) / 3234 (MB)
+[Open3D DEBUG] #     Got normal field: 0.008577108383178711 (s), 785.078125 (MB) / 785.078125 (MB) / 3234 (MB)
+[Open3D DEBUG] Point weight / Estimated Area: 3.278757e-05 / 1.308224e-01
+[Open3D DEBUG] #       Finalized tree: 0.024499893188476562 (s), 785.828125 (MB) / 785.828125 (MB) / 3234 (MB)
+[Open3D DEBUG] #  Set FEM constraints: 0.11116290092468262 (s), 785.95703125 (MB) / 785.95703125 (MB) / 3234 (MB)
+[Open3D DEBUG] #Set point constraints: 0.07193803787231445 (s), 785.95703125 (MB) / 785.95703125 (MB) / 3234 (MB)
+[Open3D DEBUG] Leaf Nodes / Active Nodes / Ghost Nodes: 147449 / 134008 / 34505
+[Open3D DEBUG] Memory Usage: 785.957 MB
+Cycle[0] Depth[ 0/10]:	Updated constraints / Got system / Solved in:  0.000 /  0.000 /  0.000	(785.957 MB)	Nodes: 8
+CG: 8.1600e-02 -> 8.1600e-02 -> 3.1069e-07 (3.8e-06) [0]
+Cycle[0] Depth[ 1/10]:	Updated constraints / Got system / Solved in:  0.013 /  0.000 /  0.000	(785.957 MB)	Nodes: 27
+  GS: 1.1174e-01 -> 1.1174e-01 -> 2.0799e-03 (1.9e-02) [8]
+Cycle[0] Depth[ 2/10]:	Updated constraints / Got system / Solved in:  0.005 /  0.003 /  0.000	(785.957 MB)	Nodes: 125
+    GS: 2.1396e-01 -> 2.1396e-01 -> 6.4604e-03 (3.0e-02) [8]
+Cycle[0] Depth[ 3/10]:	Updated constraints / Got system / Solved in:  0.000 /  0.001 /  0.000	(785.957 MB)	Nodes: 729
+      GS: 2.6632e-01 -> 2.6632e-01 -> 4.9747e-03 (1.9e-02) [8]
+Cycle[0] Depth[ 4/10]:	Updated constraints / Got system / Solved in:  0.000 /  0.003 /  0.001	(785.957 MB)	Nodes: 4913
+        GS: 2.2993e-01 -> 2.2993e-01 -> 2.0242e-03 (8.8e-03) [8]
+Cycle[0] Depth[ 5/10]:	Updated constraints / Got system / Solved in:  0.004 /  0.013 /  0.013	(785.957 MB)	Nodes: 35937
+          GS: 2.6428e-01 -> 2.6428e-01 -> 1.3627e-03 (5.2e-03) [8]
+Cycle[0] Depth[ 6/10]:	Updated constraints / Got system / Solved in:  0.001 /  0.005 /  0.008	(785.957 MB)	Nodes: 5352
+            GS: 2.3213e-01 -> 2.3213e-01 -> 8.3765e-04 (3.6e-03) [8]
+Cycle[0] Depth[ 7/10]:	Updated constraints / Got system / Solved in:  0.001 /  0.003 /  0.004	(785.957 MB)	Nodes: 9568
+              GS: 1.9828e-01 -> 1.9828e-01 -> 1.0472e-03 (5.3e-03) [8]
+Cycle[0] Depth[ 8/10]:	Updated constraints / Got system / Solved in:  0.001 /  0.004 /  0.005	(785.957 MB)	Nodes: 19112
+                GS: 1.5934e-01 -> 1.5934e-01 -> 1.5259e-03 (9.6e-03) [8]
+Cycle[0] Depth[ 9/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.007 /  0.005	(785.957 MB)	Nodes: 25448
+                  GS: 1.3875e-01 -> 1.3875e-01 -> 6.3716e-04 (4.6e-03) [8]
+Cycle[0] Depth[10/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.015 /  0.014	(785.957 MB)	Nodes: 7640
+                    GS: 7.8983e-02 -> 7.8983e-02 -> 1.2740e-03 (1.6e-02) [8]
+[Open3D DEBUG] # Linear system solved: 0.15861988067626953 (s), 785.95703125 (MB) / 785.95703125 (MB) / 3234 (MB)
+[Open3D DEBUG] Got average: 0.0800180435180664 (s), 785.95703125 (MB) / 785.95703125 (MB) / 3234 (MB)
+[Open3D DEBUG] Iso-Value: 4.994813e-01 = 1.992930e+03 / 3.990000e+03
+[Open3D DEBUG] #          Total Solve:       1.4 (s),     812.6 (MB)
+[Open3D WARNING] Write OBJ can not include triangle normals.
+✅ Сайжруулсан Poisson mesh хадгалагдлаа: ../project/workspace/Yogesh_bust/mesh_improved_poisson.obj
+
+═══════════════════════════════════════════════════════
+
+📊 Reconstruction чанарыг шинжилж байна...
+  ❌ Камерын тохиргоо: файл олдсонгүй
+  ❌ Зургийн байрлал (pose): файл олдсонгүй
+  ❌ 3D цэгүүд: файл олдсонгүй
+
+🎉  PIPELINE АМЖИЛТТАЙ ДУУСЛАА!
+⏱️  Нийт хугацаа: 1.7 минут
+
+🎯 Дараагийн алхамууд:
+   1. PLY файлыг татаж авна
+   2. MeshLab эсвэл CloudCompare-р дүрслэнэ
+   3. Шаардлагатай бол mesh generation хийнэ
+═══════════════════════════════════════════════════════
+
+✅ Pipeline амжилттай дууслаа!
+
+Process finished with exit code 0

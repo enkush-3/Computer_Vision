@@ -1,0 +1,422 @@
+/home/enkush-3/.venv3.12/bin/python /home/enkush-3/Documents/Vision_1/src/main.py
+🔍 GPU шалгаж байна...
+✅ GPU олдлоо: |   0  NVIDIA GeForce MX450           Off |   00000000:2B:00.0 Off |                  N/A |
+   Sat May 16 19:38:41 2026
+   +-----------------------------------------------------------------------------------------+
+   | NVIDIA-SMI 580.142                Driver Version: 580.142        CUDA Version: 13.0     |
+   +-----------------------------------------+------------------------+----------------------+
+   | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+   | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+   |                                         |                        |               MIG M. |
+   |=========================================+========================+======================|
+   |   0  NVIDIA GeForce MX450           Off |   00000000:2B:00.0 Off |                  N/A |
+   | N/A   55C    P8            N/A  / 5001W |       3MiB /   2048MiB |      0%      Default |
+   |                                         |                        |                  N/A |
+   +-----------------------------------------+------------------------+----------------------+
+   +-----------------------------------------------------------------------------------------+
+   | Processes:                                                                              |
+
+═══════════════════════════════════════════════════════
+🏁  PHOTOGRAMMETRY PIPELINE ЭХЭЛЛЭЭ
+═══════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════
+📋  ТОХИРГООНЫ ХУРААНГУЙ
+═══════════════════════════════════════════════════════
+   Орчин     : 💻 Local Jupyter
+   Хурдасгуур: 🚀 GPU (CUDA)
+   Зураг орол.: ../Datasets/images
+   Workspace  : ../project/workspace/images
+═══════════════════════════════════════════════════════
+
+📋 АЛХАМ 1: Зургуудыг боловсруулах
+📂 Оролтын зураг   : ../Datasets/images
+📂 Боловсруулсан   : ../images/images/
+🔢 Resize factor   : 1/1 (original)
+📸 Нийт 11 зураг олдлоо
+🔄 Боловсруулж эхэллээ (resize 1/1)...
+   [10/11] 0004.png (3072x2048 → 3072x2048)
+   [11/11] 0002.png (3072x2048 → 3072x2048)
+
+✅ Нийт 11 зураг боловсруулагдлаа → '../images/images/' хавтаст хадгалагдлаа
+
+📋 АЛХАМ 2: COLMAP pipeline
+🔧 Headless орчин тохируулагдлаа
+
+🚀 GPU олдсон → GPU pipeline-г эхлүүлж байна...
+🔧 CUDA орчин тохируулж байна...
+⚠️ CUDA суулгацын зам олдсонгүй
+
+═══════════════════════════════════════════════════════
+🚀  GPU PIPELINE ЭХЭЛЛЭЭ
+═══════════════════════════════════════════════════════
+
+📁 Хавтасны бүтцийг шалгаж байна...
+✅ 11 зураг олдлоо → ../images/images/
+✅ Workspace хавтас бэлэн: ../project/workspace/images/
+
+📋 АЛХАМ 1/5: Database үүсгэх
+
+───────────────────────────────────────────────────────
+🔄  Database creator
+📌  Команд: colmap database_creator --database_path ../project/workspace/images/database.db
+───────────────────────────────────────────────────────
+
+✅  Database creator амжилттай дууслаа (0.0с)
+
+📋 АЛХАМ 2/5: Feature extraction (GPU)
+
+🎮 GPU feature extraction эхэллээ...
+
+───────────────────────────────────────────────────────
+🔄  GPU SIFT (high quality)
+📌  Команд: colmap feature_extractor --database_path ../project/workspace/images/database.db --image_path ../images/images --ImageReader.single_camera 1 --SiftExtraction.use_gpu 1 --SiftExtraction.gpu_index 0 --SiftExtraction.max_image_size 3200 --SiftExtraction.max_num_features 16384
+───────────────────────────────────────────────────────
+  E20260516 19:39:03.263114 254349 opengl_utils.cc:55] Check failed: context_.create()
+  terminate called after throwing an instance of 'std::invalid_argument'
+    what():  [opengl_utils.cc:55] Check failed: context_.create()
+  *** Aborted at 1778931543 (unix time) try "date -d @1778931543" if you are using GNU date ***
+  PC: @                0x0 (unknown)
+  *** SIGABRT (@0x3e80003e18d) received by PID 254349 (TID 0x778dd6ac5800) from PID 254349; stack trace: ***
+      @     0x778ddb2dc206 (unknown)
+      @     0x778dd8e45f60 (unknown)
+      @     0x778dd8ea5fed pthread_kill
+      @     0x778dd8e45e2e gsignal
+      @     0x778dd8e28888 abort
+      @     0x778dd92ab05d (unknown)
+      @     0x778dd92c11ea (unknown)
+      @     0x778dd92aaa9c std::terminate()
+      @     0x778dd92c14a1 __cxa_throw
+      @     0x56732afe178f (unknown)
+      @     0x56732b4eb15f (unknown)
+      @     0x56732b101179 (unknown)
+      @     0x56732b06a100 (unknown)
+      @     0x56732b04558d (unknown)
+      @     0x778dd8e2a575 (unknown)
+      @     0x778dd8e2a628 __libc_start_main
+      @     0x56732b060a45 (unknown)
+
+❌  GPU SIFT (high quality) амжилтгүй (return code: -6, 1.1с)
+⚠️ GPU SIFT (high quality) амжилтгүй → дараагийн хувилбар туршиж байна...
+
+───────────────────────────────────────────────────────
+🔄  GPU SIFT (medium - fallback)
+📌  Команд: colmap feature_extractor --database_path ../project/workspace/images/database.db --image_path ../images/images --ImageReader.single_camera 1 --SiftExtraction.use_gpu 1 --SiftExtraction.gpu_index 0 --SiftExtraction.max_image_size 1600 --SiftExtraction.max_num_features 8192
+───────────────────────────────────────────────────────
+  E20260516 19:39:04.369817 254359 opengl_utils.cc:55] Check failed: context_.create()
+  terminate called after throwing an instance of 'std::invalid_argument'
+    what():  [opengl_utils.cc:55] Check failed: context_.create()
+  *** Aborted at 1778931544 (unix time) try "date -d @1778931544" if you are using GNU date ***
+  PC: @                0x0 (unknown)
+  *** SIGABRT (@0x3e80003e197) received by PID 254359 (TID 0x78a4d2f2b800) from PID 254359; stack trace: ***
+      @     0x78a4d965f206 (unknown)
+      @     0x78a4d7245f60 (unknown)
+      @     0x78a4d72a5fed pthread_kill
+      @     0x78a4d7245e2e gsignal
+      @     0x78a4d7228888 abort
+      @     0x78a4d76ab05d (unknown)
+      @     0x78a4d76c11ea (unknown)
+      @     0x78a4d76aaa9c std::terminate()
+      @     0x78a4d76c14a1 __cxa_throw
+      @     0x5db0e4a1a78f (unknown)
+      @     0x5db0e4f2415f (unknown)
+      @     0x5db0e4b3a179 (unknown)
+      @     0x5db0e4aa3100 (unknown)
+      @     0x5db0e4a7e58d (unknown)
+      @     0x78a4d722a575 (unknown)
+      @     0x78a4d722a628 __libc_start_main
+      @     0x5db0e4a99a45 (unknown)
+
+❌  GPU SIFT (medium - fallback) амжилтгүй (return code: -6, 1.1с)
+⚠️ GPU SIFT (medium - fallback) амжилтгүй → дараагийн хувилбар туршиж байна...
+⚠️ GPU feature extraction амжилтгүй → CPU рүү шилжиж байна
+⚠️ GPU feature extraction бүрэн амжилтгүй → CPU ашиглана
+
+💻 CPU feature extraction эхэллээ...
+
+───────────────────────────────────────────────────────
+🔄  CPU SIFT (high quality)
+📌  Команд: colmap feature_extractor --database_path ../project/workspace/images/database.db --image_path ../images/images --ImageReader.single_camera 1 --SiftExtraction.use_gpu 0 --SiftExtraction.max_image_size 1000 --SiftExtraction.max_num_features 16384
+───────────────────────────────────────────────────────
+  I20260516 19:39:05.457922 254371 misc.cc:198]
+  ==============================================================================
+  Feature extraction
+  ==============================================================================
+  I20260516 19:39:05.458329 254380 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458364 254381 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458412 254382 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458451 254383 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458534 254384 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458575 254385 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458619 254386 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:05.458658 254387 sift.cc:722] Creating SIFT CPU feature extractor
+  I20260516 19:39:07.219492 254388 feature_extraction.cc:257] Processed file [1/11]
+  I20260516 19:39:07.219545 254388 feature_extraction.cc:260]   Name:            0000.png
+  I20260516 19:39:07.219551 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:07.219558 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:07.219563 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:07.219574 254388 feature_extraction.cc:296]   Features:        6986
+  I20260516 19:39:07.541525 254388 feature_extraction.cc:257] Processed file [2/11]
+  I20260516 19:39:07.541575 254388 feature_extraction.cc:260]   Name:            0002.png
+  I20260516 19:39:07.541582 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:07.541589 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:07.541595 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:07.541606 254388 feature_extraction.cc:296]   Features:        8284
+  I20260516 19:39:07.723474 254388 feature_extraction.cc:257] Processed file [3/11]
+  I20260516 19:39:07.723522 254388 feature_extraction.cc:260]   Name:            0001.png
+  I20260516 19:39:07.723528 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:07.723533 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:07.723541 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:07.723551 254388 feature_extraction.cc:296]   Features:        8141
+  I20260516 19:39:08.008657 254388 feature_extraction.cc:257] Processed file [4/11]
+  I20260516 19:39:08.008702 254388 feature_extraction.cc:260]   Name:            0003.png
+  I20260516 19:39:08.008709 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:08.008715 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:08.008721 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:08.008731 254388 feature_extraction.cc:296]   Features:        8650
+  I20260516 19:39:08.243485 254388 feature_extraction.cc:257] Processed file [5/11]
+  I20260516 19:39:08.243557 254388 feature_extraction.cc:260]   Name:            0004.png
+  I20260516 19:39:08.243564 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:08.243569 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:08.243577 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:08.243587 254388 feature_extraction.cc:296]   Features:        8599
+  I20260516 19:39:08.444080 254388 feature_extraction.cc:257] Processed file [6/11]
+  I20260516 19:39:08.444190 254388 feature_extraction.cc:260]   Name:            0005.png
+  I20260516 19:39:08.444207 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:08.444223 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:08.444239 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:08.444257 254388 feature_extraction.cc:296]   Features:        8607
+  I20260516 19:39:08.591598 254388 feature_extraction.cc:257] Processed file [7/11]
+  I20260516 19:39:08.591638 254388 feature_extraction.cc:260]   Name:            0006.png
+  I20260516 19:39:08.591645 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:08.591650 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:08.591656 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:08.591667 254388 feature_extraction.cc:296]   Features:        9014
+  I20260516 19:39:08.608160 254388 feature_extraction.cc:257] Processed file [8/11]
+  I20260516 19:39:08.608212 254388 feature_extraction.cc:260]   Name:            0007.png
+  I20260516 19:39:08.608218 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:08.608224 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:08.608230 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:08.608239 254388 feature_extraction.cc:296]   Features:        8733
+  I20260516 19:39:08.932020 254388 feature_extraction.cc:257] Processed file [9/11]
+  I20260516 19:39:08.932060 254388 feature_extraction.cc:260]   Name:            0008.png
+  I20260516 19:39:08.932063 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:08.932067 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:08.932071 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:08.932077 254388 feature_extraction.cc:296]   Features:        8632
+  I20260516 19:39:09.203361 254388 feature_extraction.cc:257] Processed file [10/11]
+  I20260516 19:39:09.203419 254388 feature_extraction.cc:260]   Name:            0009.png
+  I20260516 19:39:09.203424 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:09.203428 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:09.203433 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:09.203444 254388 feature_extraction.cc:296]   Features:        9237
+  I20260516 19:39:09.333256 254388 feature_extraction.cc:257] Processed file [11/11]
+  I20260516 19:39:09.333287 254388 feature_extraction.cc:260]   Name:            0010.png
+  I20260516 19:39:09.333292 254388 feature_extraction.cc:286]   Dimensions:      3072 x 2048
+  I20260516 19:39:09.333293 254388 feature_extraction.cc:289]   Camera:          #1 - SIMPLE_RADIAL
+  I20260516 19:39:09.333323 254388 feature_extraction.cc:292]   Focal Length:    3686.40px
+  I20260516 19:39:09.333329 254388 feature_extraction.cc:296]   Features:        9225
+  I20260516 19:39:09.338137 254371 timer.cc:91] Elapsed time: 0.065 [minutes]
+
+✅  CPU SIFT (high quality) амжилттай дууслаа (3.9с)
+
+📋 АЛХАМ 3/5: Feature matching (GPU)
+
+───────────────────────────────────────────────────────
+🔄  GPU exhaustive matching
+📌  Команд: colmap exhaustive_matcher --database_path ../project/workspace/images/database.db --SiftMatching.use_gpu 1 --SiftMatching.gpu_index 0 --SiftMatching.guided_matching 1 --SiftMatching.max_ratio 0.75 --SiftMatching.max_distance 0.7
+───────────────────────────────────────────────────────
+  E20260516 19:39:09.366662 254407 opengl_utils.cc:55] Check failed: context_.create()
+  terminate called after throwing an instance of 'std::invalid_argument'
+    what():  [opengl_utils.cc:55] Check failed: context_.create()
+  *** Aborted at 1778931549 (unix time) try "date -d @1778931549" if you are using GNU date ***
+  PC: @                0x0 (unknown)
+  *** SIGABRT (@0x3e80003e1c7) received by PID 254407 (TID 0x726d8391d800) from PID 254407; stack trace: ***
+      @     0x726d8a04b206 (unknown)
+      @     0x726d87c45f60 (unknown)
+      @     0x726d87ca5fed pthread_kill
+      @     0x726d87c45e2e gsignal
+      @     0x726d87c28888 abort
+      @     0x726d880ab05d (unknown)
+      @     0x726d880c11ea (unknown)
+      @     0x726d880aaa9c std::terminate()
+      @     0x726d880c14a1 __cxa_throw
+      @     0x62db6115a78f (unknown)
+      @     0x62db6166415f (unknown)
+      @     0x62db612896ad (unknown)
+      @     0x62db61295ee9 (unknown)
+      @     0x62db61283837 (unknown)
+      @     0x62db611e3486 (unknown)
+      @     0x62db611be58d (unknown)
+      @     0x726d87c2a575 (unknown)
+      @     0x726d87c2a628 __libc_start_main
+      @     0x62db611d9a45 (unknown)
+
+❌  GPU exhaustive matching амжилтгүй (return code: -6, 1.1с)
+⚠️ GPU matching амжилтгүй → CPU matching туршиж байна
+
+───────────────────────────────────────────────────────
+🔄  CPU exhaustive matching (fallback)
+📌  Команд: colmap exhaustive_matcher --database_path ../project/workspace/images/database.db --SiftMatching.use_gpu 0 --SiftMatching.guided_matching 1 --SiftMatching.max_ratio 0.75 --SiftMatching.max_distance 0.7
+───────────────────────────────────────────────────────
+  I20260516 19:39:10.472579 254415 misc.cc:198]
+  ==============================================================================
+  Feature matching
+  ==============================================================================
+  I20260516 19:39:10.472723 254416 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.472760 254417 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.472801 254418 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.472833 254419 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.472888 254420 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.472934 254421 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.472981 254422 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473024 254423 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473392 254432 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473434 254433 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473482 254434 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473519 254435 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473558 254436 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473596 254437 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473634 254438 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473676 254439 sift.cc:1457] Creating SIFT CPU feature matcher
+  I20260516 19:39:10.473778 254415 pairing.cc:168] Generating exhaustive image pairs...
+  I20260516 19:39:10.473788 254415 pairing.cc:202] Matching block [1/1, 1/1]
+  I20260516 19:39:48.165213 254415 feature_matching.cc:46]  in 37.692s
+  I20260516 19:39:48.167562 254415 timer.cc:91] Elapsed time: 0.628 [minutes]
+
+✅  CPU exhaustive matching (fallback) амжилттай дууслаа (37.7с)
+
+📋 АЛХАМ 4/5: Structure-from-Motion (mapper)
+
+───────────────────────────────────────────────────────
+🔄  Structure-from-Motion (SfM)
+📌  Команд: colmap mapper --database_path ../project/workspace/images/database.db --image_path ../images/images --output_path ../project/workspace/images/sparse --Mapper.ba_refine_focal_length 0 --Mapper.ba_refine_principal_point 0 --Mapper.init_min_tri_angle 4 --Mapper.multiple_models 0 --Mapper.extract_colors 1
+───────────────────────────────────────────────────────
+  I20260516 19:39:48.228663 254610 incremental_mapper.cc:225] Loading database
+  I20260516 19:39:48.229262 254610 database_cache.cc:65] Loading cameras...
+  I20260516 19:39:48.229285 254610 database_cache.cc:75]  1 in 0.000s
+  I20260516 19:39:48.229290 254610 database_cache.cc:83] Loading matches...
+  I20260516 19:39:48.229910 254610 database_cache.cc:89]  53 in 0.001s
+  I20260516 19:39:48.229923 254610 database_cache.cc:105] Loading images...
+  I20260516 19:39:48.239068 254610 database_cache.cc:155]  11 in 0.009s (connected 11)
+  I20260516 19:39:48.239082 254610 database_cache.cc:166] Building correspondence graph...
+  I20260516 19:39:48.246599 254610 database_cache.cc:195]  in 0.008s (ignored 0)
+  I20260516 19:39:48.246625 254610 timer.cc:91] Elapsed time: 0.000 [minutes]
+  I20260516 19:39:48.247267 254610 incremental_mapper.cc:265] Finding good initial image pair
+  I20260516 19:39:48.288736 254610 incremental_mapper.cc:289] Initializing with image pair #6 and #7
+  I20260516 19:39:48.296736 254610 incremental_mapper.cc:294] Global bundle adjustment
+  I20260516 19:39:48.479961 254610 incremental_mapper.cc:375] Registering image #8 (3)
+  I20260516 19:39:48.480002 254610 incremental_mapper.cc:378] => Image sees 3330 / 6532 points
+  I20260516 19:39:49.285686 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:49.913024 254610 incremental_mapper.cc:375] Registering image #5 (4)
+  I20260516 19:39:49.913055 254610 incremental_mapper.cc:378] => Image sees 3552 / 6447 points
+  I20260516 19:39:50.954515 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:51.230557 254610 incremental_mapper.cc:375] Registering image #4 (5)
+  I20260516 19:39:51.230587 254610 incremental_mapper.cc:378] => Image sees 3452 / 6471 points
+  I20260516 19:39:52.699981 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:53.225422 254610 incremental_mapper.cc:375] Registering image #2 (6)
+  I20260516 19:39:53.225447 254610 incremental_mapper.cc:378] => Image sees 3369 / 6323 points
+  I20260516 19:39:54.255987 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:54.918257 254610 incremental_mapper.cc:375] Registering image #9 (7)
+  I20260516 19:39:54.918287 254610 incremental_mapper.cc:378] => Image sees 2971 / 6219 points
+  I20260516 19:39:55.723713 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:56.232347 254610 incremental_mapper.cc:375] Registering image #3 (8)
+  I20260516 19:39:56.232375 254610 incremental_mapper.cc:378] => Image sees 3356 / 5977 points
+  I20260516 19:39:56.992611 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:57.631652 254610 incremental_mapper.cc:375] Registering image #10 (9)
+  I20260516 19:39:57.631686 254610 incremental_mapper.cc:378] => Image sees 2820 / 6603 points
+  I20260516 19:39:58.324972 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:39:59.473884 254610 incremental_mapper.cc:375] Registering image #1 (10)
+  I20260516 19:39:59.473919 254610 incremental_mapper.cc:378] => Image sees 3246 / 4374 points
+  I20260516 19:40:00.608481 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:40:01.640401 254610 incremental_mapper.cc:375] Registering image #11 (11)
+  I20260516 19:40:01.640436 254610 incremental_mapper.cc:378] => Image sees 2540 / 4618 points
+  I20260516 19:40:02.555557 254610 incremental_mapper.cc:41] Retriangulation and Global bundle adjustment
+  I20260516 19:40:04.188654 254610 timer.cc:91] Elapsed time: 0.266 [minutes]
+
+✅  Structure-from-Motion (SfM) амжилттай дууслаа (16.0с)
+
+📋 АЛХАМ 5/5: Sparse model → PLY хөрвүүлэх
+
+───────────────────────────────────────────────────────
+🔄  PLY экспорт
+📌  Команд: colmap model_converter --input_path ../project/workspace/images/sparse/0 --output_path ../project/workspace/images/sparse_reconstruction.ply --output_type PLY
+───────────────────────────────────────────────────────
+
+✅  PLY экспорт амжилттай дууслаа (0.0с)
+
+───────────────────────────────────────────────────────
+🔄  TXT экспорт (нэмэлт)
+📌  Команд: colmap model_converter --input_path ../project/workspace/images/sparse/0 --output_path ../project/workspace/images --output_type TXT
+───────────────────────────────────────────────────────
+
+✅  TXT экспорт (нэмэлт) амжилттай дууслаа (0.1с)
+
+🎉 GPU pipeline амжилттай дууслаа!
+✅ PLY файл: ../project/workspace/images/sparse_reconstruction.ply  (171.9 KB)
+📊 Vertices: 11723
+
+📋 АЛХАМ 3: Point cloud цэвэрлэгээ
+Эхний цэгүүд: 11723
+Цэвэрлэсний дараах цэгүүд: 7488
+✅ Хадгалагдлаа: ../project/workspace/images/cleaned_pcd.ply
+
+📋 АЛХАМ 4: Poisson mesh үүсгэх
+🚀 Сайжруулсан Algorithmic Mesh эхэллээ...
+[Open3D DEBUG] Input Points / Samples: 11284 / 10511
+[Open3D DEBUG] #   Got kernel density: 0.028293848037719727 (s), 428.4296875 (MB) / 428.4296875 (MB) / 3234 (MB)
+[Open3D DEBUG] #     Got normal field: 0.026700973510742188 (s), 436.09375 (MB) / 436.09375 (MB) / 3234 (MB)
+[Open3D DEBUG] Point weight / Estimated Area: 6.612105e-05 / 7.461100e-01
+[Open3D DEBUG] #       Finalized tree: 0.04693603515625 (s), 446.0546875 (MB) / 446.0546875 (MB) / 3234 (MB)
+[Open3D DEBUG] #  Set FEM constraints: 0.08043193817138672 (s), 446.2109375 (MB) / 446.2109375 (MB) / 3234 (MB)
+[Open3D DEBUG] #Set point constraints: 0.010699987411499023 (s), 446.21484375 (MB) / 446.21484375 (MB) / 3234 (MB)
+[Open3D DEBUG] Leaf Nodes / Active Nodes / Ghost Nodes: 432216 / 249984 / 243977
+[Open3D DEBUG] Memory Usage: 446.219 MB
+Cycle[0] Depth[ 0/10]:	Updated constraints / Got system / Solved in:  0.000 /  0.000 /  0.000	(446.219 MB)	Nodes: 8
+CG: 5.7696e-01 -> 5.7696e-01 -> 3.6758e-05 (6.4e-05) [0]
+Cycle[0] Depth[ 1/10]:	Updated constraints / Got system / Solved in:  0.000 /  0.000 /  0.000	(446.219 MB)	Nodes: 27
+  GS: 7.6780e-01 -> 7.6780e-01 -> 2.3640e-03 (3.1e-03) [8]
+Cycle[0] Depth[ 2/10]:	Updated constraints / Got system / Solved in:  0.001 /  0.000 /  0.000	(446.219 MB)	Nodes: 125
+    GS: 9.6226e-01 -> 9.6226e-01 -> 5.6453e-03 (5.9e-03) [8]
+Cycle[0] Depth[ 3/10]:	Updated constraints / Got system / Solved in:  0.001 /  0.001 /  0.000	(446.219 MB)	Nodes: 729
+      GS: 8.5584e-01 -> 8.5584e-01 -> 1.0833e-02 (1.3e-02) [8]
+Cycle[0] Depth[ 4/10]:	Updated constraints / Got system / Solved in:  0.001 /  0.005 /  0.001	(446.219 MB)	Nodes: 4913
+        GS: 8.7921e-01 -> 8.7921e-01 -> 4.2438e-03 (4.8e-03) [8]
+Cycle[0] Depth[ 5/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.017 /  0.016	(446.219 MB)	Nodes: 35937
+          GS: 8.8947e-01 -> 8.8947e-01 -> 5.5831e-03 (6.3e-03) [8]
+Cycle[0] Depth[ 6/10]:	Updated constraints / Got system / Solved in:  0.003 /  0.006 /  0.013	(446.219 MB)	Nodes: 27888
+            GS: 6.7010e-01 -> 6.7010e-01 -> 3.2979e-03 (4.9e-03) [8]
+Cycle[0] Depth[ 7/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.009 /  0.026	(449.621 MB)	Nodes: 66384
+              GS: 4.0833e-01 -> 4.0833e-01 -> 2.5116e-03 (6.2e-03) [8]
+Cycle[0] Depth[ 8/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.012 /  0.014	(451.918 MB)	Nodes: 84480
+                GS: 2.4502e-01 -> 2.4502e-01 -> 1.8342e-04 (7.5e-04) [8]
+Cycle[0] Depth[ 9/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.005 /  0.002	(451.918 MB)	Nodes: 4344
+                  GS: 5.0468e-02 -> 5.0468e-02 -> 1.1964e-04 (2.4e-03) [8]
+Cycle[0] Depth[10/10]:	Updated constraints / Got system / Solved in:  0.002 /  0.007 /  0.001	(451.918 MB)	Nodes: 0
+                    GS: 0.0000e+00 -> 0.0000e+00 -> 0.0000e+00 (-nan) [8]
+[Open3D DEBUG] # Linear system solved: 0.20691704750061035 (s), 451.91796875 (MB) / 451.91796875 (MB) / 3234 (MB)
+[Open3D DEBUG] Got average: 0.0045549869537353516 (s), 451.921875 (MB) / 451.921875 (MB) / 3234 (MB)
+[Open3D DEBUG] Iso-Value: 4.934633e-01 = 5.568240e+03 / 1.128400e+04
+[Open3D DEBUG] #          Total Solve:       1.8 (s),     484.6 (MB)
+[Open3D WARNING] Write OBJ can not include triangle normals.
+✅ Сайжруулсан Poisson mesh хадгалагдлаа: ../project/workspace/images/mesh_improved_poisson.obj
+
+═══════════════════════════════════════════════════════
+
+📊 Reconstruction чанарыг шинжилж байна...
+  ❌ Камерын тохиргоо: файл олдсонгүй
+  ❌ Зургийн байрлал (pose): файл олдсонгүй
+  ❌ 3D цэгүүд: файл олдсонгүй
+
+🎉  PIPELINE АМЖИЛТТАЙ ДУУСЛАА!
+⏱️  Нийт хугацаа: 1.4 минут
+
+🎯 Дараагийн алхамууд:
+   1. PLY файлыг татаж авна
+   2. MeshLab эсвэл CloudCompare-р дүрслэнэ
+   3. Шаардлагатай бол mesh generation хийнэ
+═══════════════════════════════════════════════════════
+
+✅ Pipeline амжилттай дууслаа!
+
+Process finished with exit code 0

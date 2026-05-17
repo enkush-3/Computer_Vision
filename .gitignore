@@ -1,0 +1,16 @@
+# IDE тохиргоо
+.idea/
+Datasets/
+images/
+
+# Python кэш
+__pycache__/
+*.py[cod]
+
+# COLMAP-н том binary өгөгдөл (текст экспорт хангалттай)
+sparse/
+database.db
+
+# Шаардлагагүй лог, түр зуурын файлууд
+*.log
+*.tmp
