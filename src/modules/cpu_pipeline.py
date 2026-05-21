@@ -1,25 +1,10 @@
-"""
-CPU ашигласан COLMAP pipeline.
-GPU байхгүй үед эсвэл GPU pipeline амжилтгүй болсон үед ашиглана.
-"""
-
 import os
 
 from src.utils.colmap_utils import check_directory_structure, run_colmap_command
 
 
 def run_cpu_feature_extraction(database_path: str, image_dir: str) -> bool:
-    """
-    CPU ашиглан feature extraction хийнэ (олон fallback тохиргоотой).
-
-    Args:
-        database_path: COLMAP database файлын зам.
-        image_dir:     Зургийн хавтас.
-
-    Returns:
-        Аль нэг тохиргоо амжилттай бол True, бүх амжилтгүй бол False.
-    """
-    print("\n💻 CPU feature extraction эхэллээ...")
+    print("\nCPU feature extraction эхэллээ...")
 
     configs = [
         {
@@ -60,25 +45,14 @@ def run_cpu_feature_extraction(database_path: str, image_dir: str) -> bool:
     for cfg in configs:
         if run_colmap_command(cfg["cmd"], cfg["desc"]):
             return True
-        print(f"⚠️ {cfg['desc']} амжилтгүй → дараагийн хувилбар туршиж байна...")
+        print(f"{cfg['desc']} амжилтгүй → дараагийн хувилбар туршиж байна...")
 
     return False
 
 
 def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
-    """
-    Бүрэн CPU pipeline:
-      Database → Feature extraction → Matching → SfM → PLY экспорт.
-
-    Args:
-        image_dir:     Боловсруулсан зургийн хавтас.
-        workspace_dir: COLMAP workspace хавтас.
-
-    Returns:
-        Амжилттай бол True, үгүй бол False.
-    """
     print("\n" + "═" * 55)
-    print("💻  CPU PIPELINE ЭХЭЛЛЭЭ")
+    print("  CPU PIPELINE ЭХЭЛЛЭЭ")
     print("═" * 55)
 
     database_path     = os.path.join(workspace_dir, "database.db")
@@ -90,7 +64,7 @@ def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
         return False
 
     # Алхам 1: Database үүсгэх
-    print("\n📋 АЛХАМ 1/5: Database үүсгэх")
+    print("\nАЛХАМ 1/5: Database үүсгэх")
     if not run_colmap_command(
         ["colmap", "database_creator", "--database_path", database_path],
         "Database creator",
@@ -98,13 +72,13 @@ def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
         return False
 
     # Алхам 2: Feature extraction (CPU)
-    print("\n📋 АЛХАМ 2/5: Feature extraction (CPU)")
+    print("\nАЛХАМ 2/5: Feature extraction (CPU)")
     if not run_cpu_feature_extraction(database_path, image_dir):
         print("❌ Бүх feature extraction хувилбар амжилтгүй")
         return False
 
     # Алхам 3: Feature matching (CPU)
-    print("\n📋 АЛХАМ 3/5: Feature matching (CPU)")
+    print("\nАЛХАМ 3/5: Feature matching (CPU)")
     if not run_colmap_command(
         [
             "colmap", "exhaustive_matcher",
@@ -119,7 +93,7 @@ def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
         return False
 
     # Алхам 4: Structure-from-Motion
-    print("\n📋 АЛХАМ 4/5: Structure-from-Motion (mapper)")
+    print("\nАЛХАМ 4/5: Structure-from-Motion (mapper)")
     os.makedirs(sparse_dir, exist_ok=True)
     if not run_colmap_command(
         [
@@ -138,7 +112,7 @@ def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
         return False
 
     if not os.path.exists(sparse_model_path):
-        print("❌ Sparse model үүсгэгдсэнгүй")
+        print("Sparse model үүсгэгдсэнгүй")
         return False
 
     # 3D цэгийн тоог харуулах
@@ -146,10 +120,10 @@ def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
     if os.path.exists(points_file):
         with open(points_file, "r") as f:
             lines = [ln for ln in f if not ln.startswith("#") and ln.strip()]
-        print(f"📊 Sparse reconstruction: {len(lines)} 3D цэг")
+        print(f"Sparse reconstruction: {len(lines)} 3D цэг")
 
     # Алхам 5: PLY экспорт
-    print("\n📋 АЛХАМ 5/5: Sparse model → PLY хөрвүүлэх")
+    print("\nАЛХАМ 5/5: Sparse model → PLY хөрвүүлэх")
     if not run_colmap_command(
         [
             "colmap", "model_converter",
@@ -176,7 +150,6 @@ def run_cpu_pipeline(image_dir: str, workspace_dir: str) -> bool:
 
 
 def analyze_reconstruction_quality(workspace_dir: str) -> None:
-    """Sparse reconstruction-ын чанарыг шинжилнэ."""
     print("\n📊 Reconstruction чанарыг шинжилж байна...")
     sparse_model_path = os.path.join(workspace_dir, "sparse", "0")
 
@@ -189,25 +162,25 @@ def analyze_reconstruction_quality(workspace_dir: str) -> None:
         if os.path.exists(filepath):
             with open(filepath, "r") as f:
                 lines = [ln for ln in f if not ln.startswith("#") and ln.strip()]
-            print(f"  ✅ {description}: {len(lines)} бичлэг")
+            print(f"  {description}: {len(lines)} бичлэг")
         else:
-            print(f"  ❌ {description}: файл олдсонгүй")
+            print(f"  {description}: файл олдсонгүй")
 
 
 def _check_ply_output(output_ply: str, mode: str) -> bool:
     """PLY файл амжилттай үүссэн эсэхийг шалгана."""
     if os.path.exists(output_ply):
         size = os.path.getsize(output_ply)
-        print(f"\n🎉 {mode} pipeline амжилттай дууслаа!")
-        print(f"✅ PLY файл: {output_ply}  ({size/1024:.1f} KB)")
+        print(f"\n{mode} pipeline амжилттай дууслаа!")
+        print(f"PLY файл: {output_ply}  ({size/1024:.1f} KB)")
         try:
             with open(output_ply, "r", errors="ignore") as f:
                 for line in f.read(1000).split("\n"):
                     if "element vertex" in line:
-                        print(f"📊 Vertices: {line.split()[-1]}")
+                        print(f"Vertices: {line.split()[-1]}")
         except Exception:
             pass
         return True
     else:
-        print(f"❌ PLY файл үүсгэгдсэнгүй: {output_ply}")
+        print(f"PLY файл үүсгэгдсэнгүй: {output_ply}")
         return False

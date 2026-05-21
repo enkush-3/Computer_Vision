@@ -1,7 +1,3 @@
-"""
-Зургуудыг боловсруулах, resize хийх хэрэгслүүд.
-"""
-
 import os
 from PIL import Image
 
@@ -10,24 +6,9 @@ VALID_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff"}
 
 
 def preprocess_images(input_dir: str, output_dir: str, resize_factor: int = 1) -> int:
-    """
-    input_dir дахь зургуудыг resize хийж output_dir-д хадгална.
-
-    Args:
-        input_dir:     Оролтын зургийн хавтас.
-        output_dir:    Гаралтын хавтас.
-        resize_factor: Хэмжээ багасгах коэффициент (1=original, 2=half, 4=quarter).
-
-    Returns:
-        Боловсруулагдсан зургийн тоо.
-
-    Raises:
-        FileNotFoundError: input_dir олдоогүй үед.
-        ValueError:        Хангалтгүй зураг байвал.
-    """
     if not os.path.exists(input_dir):
         raise FileNotFoundError(
-            f"❌ Зургийн хавтас олдсонгүй: {input_dir}\n"
+            f"Зургийн хавтас олдсонгүй: {input_dir}\n"
             f"   image_dir0 замыг зөв оруулна уу."
         )
 
@@ -39,16 +20,16 @@ def preprocess_images(input_dir: str, output_dir: str, resize_factor: int = 1) -
 
     if n_images < 2:
         raise ValueError(
-            f"❌ Зураг хангалтгүй: {n_images} зураг олдлоо. Дор хаяж 2 шаардлагатай."
+            f"Зураг хангалтгүй: {n_images} зураг олдлоо. Дор хаяж 2 шаардлагатай."
         )
 
     os.makedirs(output_dir, exist_ok=True)
 
-    print(f"📂 Оролтын зураг   : {input_dir}")
-    print(f"📂 Боловсруулсан   : {output_dir}/")
-    print(f"🔢 Resize factor   : 1/{resize_factor} {'(original)' if resize_factor == 1 else ''}")
-    print(f"📸 Нийт {n_images} зураг олдлоо")
-    print(f"🔄 Боловсруулж эхэллээ (resize 1/{resize_factor})...")
+    print(f"Оролтын зураг   : {input_dir}")
+    print(f"Боловсруулсан   : {output_dir}/")
+    print(f"Resize factor   : 1/{resize_factor} {'(original)' if resize_factor == 1 else ''}")
+    print(f"Нийт {n_images} зураг олдлоо")
+    print(f"Боловсруулж эхэллээ (resize 1/{resize_factor})...")
 
     for idx, filename in enumerate(image_files, 1):
         src_path = os.path.join(input_dir, filename)
@@ -65,5 +46,5 @@ def preprocess_images(input_dir: str, output_dir: str, resize_factor: int = 1) -
         if idx % 10 == 0 or idx == n_images:
             print(f"   [{idx}/{n_images}] {filename} ({w}x{h} → {w//resize_factor}x{h//resize_factor})")
 
-    print(f"\n✅ Нийт {n_images} зураг боловсруулагдлаа → '{output_dir}/' хавтаст хадгалагдлаа")
+    print(f"\nНийт {n_images} зураг боловсруулагдлаа → '{output_dir}/' хавтаст хадгалагдлаа")
     return n_images

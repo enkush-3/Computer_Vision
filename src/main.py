@@ -1,16 +1,3 @@
-"""
-Photogrammetry pipeline — үндсэн оролтын цэг.
-
-Ажиллуулах:
-    python -m src.main
-
-Дараалал:
-    1. Зургуудыг resize хийнэ
-    2. GPU байвал GPU pipeline, үгүй бол CPU pipeline ажиллуулна
-    3. Point cloud цэвэрлэнэ (algorithmic + ML)
-    4. Poisson mesh үүсгэнэ
-"""
-
 import os
 import time
 
@@ -23,7 +10,6 @@ from src.utils.image_utils import preprocess_images
 
 
 def setup_headless_environment() -> None:
-    """Headless орчинд COLMAP ажиллуулахад шаардлагатай env тохируулна."""
     env_vars = {
         "QT_QPA_PLATFORM":           "offscreen",
         "DISPLAY":                   "",
@@ -33,15 +19,14 @@ def setup_headless_environment() -> None:
     }
     for key, value in env_vars.items():
         os.environ[key] = value
-    print("🔧 Headless орчин тохируулагдлаа")
+    print("Headless орчин тохируулагдлаа")
 
 
 def setup_cuda_environment(has_gpu: bool) -> bool:
-    """COLMAP-д зориулж CUDA орчинг тохируулна."""
     if not has_gpu:
         return False
 
-    print("🔧 CUDA орчин тохируулж байна...")
+    print("CUDA орчин тохируулж байна...")
     cuda_paths = [
         "/usr/local/cuda",
         "/opt/cuda",
@@ -50,7 +35,7 @@ def setup_cuda_environment(has_gpu: bool) -> bool:
     ]
     for path in cuda_paths:
         if os.path.exists(path):
-            print(f"✅ CUDA олдлоо: {path}")
+            print(f"CUDA олдлоо: {path}")
             os.environ["CUDA_HOME"]  = path
             os.environ["CUDA_ROOT"]  = path
             cuda_bin = os.path.join(path, "bin")
@@ -63,61 +48,48 @@ def setup_cuda_environment(has_gpu: bool) -> bool:
             os.environ["CUDA_VISIBLE_DEVICES"] = "0"
             return True
 
-    print("⚠️ CUDA суулгацын зам олдсонгүй")
+    print("CUDA суулгацын зам олдсонгүй")
     return False
 
 
-def print_summary(environment: str, has_gpu: bool) -> None:
-    """Тохиргооны хураангуйг хэвлэнэ."""
+def print_summary(has_gpu: bool) -> None:
     print()
     print("═" * 55)
-    print("📋  ТОХИРГООНЫ ХУРААНГУЙ")
+    print("    ТОХИРГООНЫ ХУРААНГУЙ")
     print("═" * 55)
-    print(f"   Орчин     : {'☁️  Google Colab' if environment == 'colab' else '💻 Local Jupyter'}")
-    print(f"   Хурдасгуур: {'🚀 GPU (CUDA)' if has_gpu else '🐌 CPU (GPU байхгүй)'}")
+    print(f"   Хурдасгуур: {'GPU (CUDA)' if has_gpu else 'CPU (GPU байхгүй)'}")
     print(f"   Зураг орол.: {config.IMAGE_INPUT_DIR}")
     print(f"   Workspace  : {config.WORKSPACE_DIR}")
     print("═" * 55)
 
 
 def run_colmap_stage(has_gpu: bool) -> bool:
-    """GPU эсвэл CPU pipeline-г ажиллуулна."""
     setup_headless_environment()
 
     if has_gpu:
-        print("\n🚀 GPU олдсон → GPU pipeline-г эхлүүлж байна...")
+        print("\nGPU олдсон → GPU pipeline-г эхлүүлж байна...")
         setup_cuda_environment(has_gpu)
         success = run_gpu_pipeline(config.IMAGE_PROCESSED_DIR, config.WORKSPACE_DIR)
         if not success:
-            print("\n⚠️  GPU pipeline амжилтгүй → CPU pipeline рүү шилжиж байна...")
+            print("\nGPU pipeline амжилтгүй → CPU pipeline рүү шилжиж байна...")
             success = run_cpu_pipeline(config.IMAGE_PROCESSED_DIR, config.WORKSPACE_DIR)
     else:
-        print("\n💻 GPU байхгүй → CPU pipeline-г эхлүүлж байна...")
+        print("\nGPU байхгүй → CPU pipeline-г эхлүүлж байна...")
         success = run_cpu_pipeline(config.IMAGE_PROCESSED_DIR, config.WORKSPACE_DIR)
 
     return success
 
 
 def main() -> bool:
-    """
-    Бүрэн photogrammetry pipeline:
-      Зураг → COLMAP → Point cloud цэвэрлэгээ → Mesh.
-
-    Returns:
-        Амжилттай бол True, үгүй бол False.
-    """
     t0 = time.time()
-
-    environment = config.ENVIRONMENT
     has_gpu     = config.HAS_GPU
 
     print("\n" + "═" * 55)
-    print("🏁  PHOTOGRAMMETRY PIPELINE ЭХЭЛЛЭЭ")
+    print("PHOTOGRAMMETRY PIPELINE ЭХЭЛЛЭЭ")
     print("═" * 55)
-    print_summary(environment, has_gpu)
+    print_summary(has_gpu)
 
-    # ── 1. Зургуудыг resize хийх ──────────────────────────────
-    print("\n📋 АЛХАМ 1: Зургуудыг боловсруулах")
+    print("\nАЛХАМ 1: Зургуудыг боловсруулах")
     try:
         preprocess_images(
             input_dir=config.IMAGE_INPUT_DIR,
@@ -128,33 +100,29 @@ def main() -> bool:
         print(e)
         return False
 
-    # ── 2. COLMAP pipeline (GPU / CPU) ────────────────────────
-    print("\n📋 АЛХАМ 2: COLMAP pipeline")
+    print("\nАЛХАМ 2: COLMAP pipeline")
     if not run_colmap_stage(has_gpu):
-        print("\n❌  COLMAP PIPELINE АМЖИЛТГҮЙ ДУУСЛАА")
+        print("\nCOLMAP PIPELINE АМЖИЛТГҮЙ ДУУСЛАА")
         return False
 
-    # ── 3. Point cloud цэвэрлэгээ ────────────────────────────
-    print("\n📋 АЛХАМ 3: Point cloud цэвэрлэгээ")
+    print("\nАЛХАМ 3: Point cloud цэвэрлэгээ")
     deep_clean_pcd(
         path=config.SPARSE_PLY_PATH,
         output_path=config.CLEANED_PLY_PATH,
     )
 
-    # ── 4. Mesh үүсгэх ───────────────────────────────────────
-    print("\n📋 АЛХАМ 4: Poisson mesh үүсгэх")
+    print("\nАЛХАМ 4: Poisson mesh үүсгэх")
     build_poisson_mesh(
-        input_ply=config.SPARSE_PLY_PATH,
+        input_ply=config.CLEANED_PLY_PATH,
         output_obj=config.OUTPUT_MESH_PATH,
     )
 
-    # ── Дүгнэлт ──────────────────────────────────────────────
     total_time = time.time() - t0
     print("\n" + "═" * 55)
     analyze_reconstruction_quality(config.WORKSPACE_DIR)
-    print("\n🎉  PIPELINE АМЖИЛТТАЙ ДУУСЛАА!")
-    print(f"⏱️  Нийт хугацаа: {total_time / 60:.1f} минут")
-    print("\n🎯 Дараагийн алхамууд:")
+    print("\n  PIPELINE АМЖИЛТТАЙ ДУУСЛАА!")
+    print(f"  Нийт хугацаа: {total_time / 60:.1f} минут")
+    print("\n Дараагийн алхамууд:")
 
     print("   1. PLY файлыг татаж авна")
     print("   2. MeshLab эсвэл CloudCompare-р дүрслэнэ")
@@ -164,4 +132,4 @@ def main() -> bool:
 
 if __name__ == "__main__":
     success = main()
-    print(f"\n{'✅ Pipeline амжилттай дууслаа!' if success else '❌ Pipeline амжилтгүй.'}")
+    print(f"\n{' Pipeline амжилттай дууслаа!' if success else '❌ Pipeline амжилтгүй.'}")

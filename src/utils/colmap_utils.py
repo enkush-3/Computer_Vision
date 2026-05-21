@@ -1,7 +1,3 @@
-"""
-COLMAP командыг ажиллуулах болон хавтасны бүтцийг шалгах хэрэгслүүд.
-"""
-
 import os
 import subprocess
 import time
@@ -14,21 +10,10 @@ def run_colmap_command(
     timeout: int = 3600,
     verbose: bool = True,
 ) -> bool:
-    """
-    COLMAP командыг ажиллуулна.
 
-    Args:
-        command:     Ажиллуулах COLMAP команд (жишээ: ["colmap", "mapper", ...]).
-        description: Хэвлэх тайлбар.
-        timeout:     Хамгийн их хүлээх хугацаа (секунд).
-        verbose:     True үед бүх гаралтыг real-time хэвлэнэ.
-
-    Returns:
-        Амжилттай бол True, амжилтгүй бол False.
-    """
     print(f"\n{'─'*55}")
-    print(f"🔄  {description}")
-    print(f"📌  Команд: {' '.join(command)}")
+    print(f"  {description}")
+    print(f"  Команд: {' '.join(command)}")
     print(f"{'─'*55}")
     t_start = time.time()
 
@@ -52,7 +37,7 @@ def run_colmap_command(
                     print(f"  {line}")
                 if time.time() > deadline:
                     process.kill()
-                    print(f"\n⏰ {description} - хугацаа хэтэрлээ ({timeout}с)")
+                    print(f"\n{description} - хугацаа хэтэрлээ ({timeout}с)")
                     return False
 
             process.wait()
@@ -70,35 +55,25 @@ def run_colmap_command(
 
         elapsed = time.time() - t_start
         if returncode == 0:
-            print(f"\n✅  {description} амжилттай дууслаа ({elapsed:.1f}с)")
+            print(f"\n{description} амжилттай дууслаа ({elapsed:.1f}с)")
             return True
         else:
-            print(f"\n❌  {description} амжилтгүй (return code: {returncode}, {elapsed:.1f}с)")
+            print(f"\n{description} амжилтгүй (return code: {returncode}, {elapsed:.1f}с)")
             return False
 
     except subprocess.TimeoutExpired:
-        print(f"\n⏰  {description} - хугацаа хэтэрлээ ({timeout}с)")
+        print(f"\n{description} - хугацаа хэтэрлээ ({timeout}с)")
         return False
     except Exception as e:
-        print(f"\n❌  {description} - алдаа гарлаа: {e}")
+        print(f"\n{description} - алдаа гарлаа: {e}")
         return False
 
 
 def check_directory_structure(workspace_dir: str, image_dir: str) -> bool:
-    """
-    Шаардлагатай хавтас болон зургийн тоог шалгана.
-
-    Args:
-        workspace_dir: COLMAP workspace хавтас.
-        image_dir:     Зургийн хавтас.
-
-    Returns:
-        Шаардлага хангасан бол True, үгүй бол False.
-    """
-    print(f"\n📁 Хавтасны бүтцийг шалгаж байна...")
+    print(f"\nХавтасны бүтцийг шалгаж байна...")
 
     if not os.path.exists(image_dir):
-        print(f"❌ Зургийн хавтас олдсонгүй: {image_dir}")
+        print(f"Зургийн хавтас олдсонгүй: {image_dir}")
         return False
 
     imgs = [
@@ -106,10 +81,10 @@ def check_directory_structure(workspace_dir: str, image_dir: str) -> bool:
         if f.lower().endswith((".jpg", ".jpeg", ".png", ".bmp", ".tiff"))
     ]
     if len(imgs) < 2:
-        print(f"❌ Зураг хангалтгүй ({len(imgs)} ширхэг). Дор хаяж 2 шаардлагатай.")
+        print(f"Зураг хангалтгүй ({len(imgs)} ширхэг). Дор хаяж 2 шаардлагатай.")
         return False
 
-    print(f"✅ {len(imgs)} зураг олдлоо → {image_dir}/")
+    print(f"{len(imgs)} зураг олдлоо → {image_dir}/")
     os.makedirs(workspace_dir, exist_ok=True)
-    print(f"✅ Workspace хавтас бэлэн: {workspace_dir}/")
+    print(f"Workspace хавтас бэлэн: {workspace_dir}/")
     return True
